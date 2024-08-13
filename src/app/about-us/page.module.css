@@ -1,0 +1,89 @@
+.article {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border-radius: 15px;
+    background-color: rgba(192, 192, 192, 0.8);
+    width: 95%;
+    margin: auto;
+    color: black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 15px 0px;
+}
+
+.articleInfo {
+    padding: 20px;
+    padding-top: 5px;
+    padding-left: 20px;
+    flex-basis: 50%;
+}
+
+.articleInfo h2 {
+    margin: 0;
+}
+
+.smallImageGallery {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
+    flex: 1;
+}
+
+.smallImageGallery:hover {
+    cursor: pointer;
+}
+
+.image-wrapper {
+    position: relative;
+    margin: 10px;
+    display: inline-block;
+}
+
+.image-wrapper:hover {
+    cursor: pointer;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 162, 255, 0.2);
+    /* Light blue overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-wrapper:hover .overlay {
+    opacity: 1;
+}
+
+.expand-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    font-size: 24px;
+    color: white;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.image-wrapper:hover .expand-icon {
+    display: block;
+}
+
+.partner {
+    display: inline-block;
+    padding: 0 30px;
+}

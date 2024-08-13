@@ -1,0 +1,35 @@
+#footer {
+    display: flex;
+    height: 220px;
+    font-size: 1.8rem;
+    box-sizing: border-box;
+}
+
+.footerCol {
+    width: 25%;
+    margin-left: 4%;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.footerCol h3 {
+    color: rgb(252, 167, 12);
+    margin-bottom: 0;
+}
+
+.footerCol p {
+    margin: 0;
+}
+
+.footerCol a {
+    text-decoration: none;
+    color: gray;
+}
+
+.footerCol a:hover {
+    color: transparent;
+    background-clip: content-box;
+    background: -webkit-linear-gradient(left, #0ca2e0 32%, #25dde4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
