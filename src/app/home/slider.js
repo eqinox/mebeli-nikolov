@@ -59,7 +59,7 @@ const Slider = forwardRef(({ href, resetImage, handleNextImage, handlePrevImage,
             // Clear any timeout still running
             clearTimeout(timeoutRef.current);
         };
-    }, [href]);
+    }, [href, allImagesLinks.length, currentImageIndex, handleKeyDown, overridedHandleNextImage]);
 
     const executeTimeoutCallback = () => {
         if (lastTimeoutCallbackRef.current) {

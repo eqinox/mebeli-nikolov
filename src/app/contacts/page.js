@@ -39,23 +39,9 @@ const Contacts = () => {
             flexDirection: 'column',
             marginRight: '10%',
         }}>
-            {leftSidePartners.map((image) => {
-                const { width, height } = useImageSize(image.src);
-                const adjustedWidth = width * 0.4;
-                const adjustedHeight = height * 0.4;
-                return (<div
-                    key={image.id}
-                    className={styles.partner}
-                    style={{ marginBottom: '30px' }}
-                >
-                    <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={adjustedWidth}
-                        height={adjustedHeight}
-                    />
-                </div>)
-            })}
+            {leftSidePartners.map((image) => (
+                <PartnerImage key={image.id} image={image} />
+            ))}
         </div>
 
         <div className={styles.container}>
@@ -91,25 +77,33 @@ const Contacts = () => {
             flexDirection: 'column',
             marginLeft: '10%'
         }}>
-            {rightSidePartners.map((image) => {
-                const { width, height } = useImageSize(image.src);
-                const adjustedWidth = width * 0.4;
-                const adjustedHeight = height * 0.4;
-                return (<div
-                    key={image.id}
-                    className={styles.partner}
-                    style={{ marginBottom: '30px' }}
-                >
-                    <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={adjustedWidth}
-                        height={adjustedHeight}
-                    />
-                </div>)
-            })}
+            {rightSidePartners.map((image) => (
+                <PartnerImage key={image.id} image={image} />
+            ))}
         </div>
     </div>;
 };
+
+const PartnerImage = ({ image }) => {
+    const { width, height } = useImageSize(image.src);
+    const adjustedWidth = width * 0.4;
+    const adjustedHeight = height * 0.4;
+
+    return (
+        <div
+            key={image.id}
+            className={styles.partner}
+            style={{ marginBottom: '30px' }}
+        >
+            <Image
+                src={image.src}
+                alt={image.alt}
+                width={adjustedWidth}
+                height={adjustedHeight}
+            />
+        </div>
+    );
+};
+
 
 export default Contacts;
