@@ -12,16 +12,13 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('enter here?',);
     const fetchImages = async () => {
       try {
         const response = await axiosInstance.get(`/api/slider-furnitures/1?populate=*`);
-        console.log('res', response.data.data);
         setImages(response.data.data);
         const imagesLinks = response.data.data.attributes.images.data.map((image) => imageUrlBase + image.attributes.url);
         const href = imagesLinks[0];
         if (href) {
-          console.log('imageLinks', imagesLinks);
           setImageForOpening(href);
           setAllImagesLinks(imagesLinks);
         }
@@ -40,8 +37,7 @@ export default function Home() {
   const goToNextImage = (url) => {
     const index = allImagesLinks.findIndex((item) => item === url);
     if (index + 1 === allImagesLinks.length) {
-      console.log('its the last so skip');
-      // setImageForOpening(allImagesLinks[0].src);
+      // its the last so skip
     } else {
       setImageForOpening(allImagesLinks[index + 1]);
     }
@@ -50,8 +46,7 @@ export default function Home() {
   const goToPrevImage = (url) => {
     const index = allImagesLinks.findIndex((item) => item === url);
     if (index - 1 === -1) {
-      console.log('its first so skip');
-      // setImageForOpening(allImagesLinks[allImagesLinks.length - 1]);
+      // its first so skip
     } else {
       setImageForOpening(allImagesLinks[index - 1]);
     }

@@ -37,7 +37,6 @@ const Gallery = () => {
         const href = imagesLinks[0];
         if (href) {
             sliderRef.current.showModal();
-            console.log('imageLinks', imagesLinks);
             setImageForOpening(href);
             setAllImagesLinks(imagesLinks);
         }
@@ -46,8 +45,7 @@ const Gallery = () => {
     const goToNextImage = (url) => {
         const index = allImagesLinks.findIndex((item) => item === url);
         if (index + 1 === allImagesLinks.length) {
-            console.log('its the last so skip' );
-            // setImageForOpening(allImagesLinks[0].src);
+            // its the last so skip
         } else {
             setImageForOpening(allImagesLinks[index + 1]);
         }
@@ -56,8 +54,7 @@ const Gallery = () => {
     const goToPrevImage = (url) => {
         const index = allImagesLinks.findIndex((item) => item === url);
         if (index - 1 === -1) {
-            console.log('its first so skip' );
-            // setImageForOpening(allImagesLinks[allImagesLinks.length - 1]);
+            // its first so skip
         } else {
             setImageForOpening(allImagesLinks[index - 1]);
         }

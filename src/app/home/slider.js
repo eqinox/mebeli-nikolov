@@ -17,27 +17,6 @@ const Slider = forwardRef(({ href, resetImage, handleNextImage, handlePrevImage,
     const timeoutRef = useRef(null);
     const lastTimeoutCallbackRef = useRef(null);
 
-    
-
-    const currentImageIndex = allImagesLinks.indexOf(href);
-    let twoTimesPrevImgUrl = null;
-    let twoTimesNextImgUrl = null;
-    let prevImageUrl = null;
-    let nextImageUrl = null;
-    if (currentImageIndex - 1 !== -1) {
-        prevImageUrl = allImagesLinks[currentImageIndex - 1];
-    }
-    if (currentImageIndex + 1 !== allImagesLinks.length) {
-        nextImageUrl = allImagesLinks[currentImageIndex + 1];
-    }
-
-    if (currentImageIndex - 2 !== -2) {
-        twoTimesPrevImgUrl = allImagesLinks[currentImageIndex - 2];
-    }
-    if (currentImageIndex + 2 !== allImagesLinks.length) {
-        twoTimesNextImgUrl = allImagesLinks[currentImageIndex + 2];
-    }
-
     useEffect(() => {
         // Set up the keydown event listener
         document.addEventListener('keydown', handleKeyDown);
@@ -59,7 +38,26 @@ const Slider = forwardRef(({ href, resetImage, handleNextImage, handlePrevImage,
             // Clear any timeout still running
             clearTimeout(timeoutRef.current);
         };
-    }, [href, allImagesLinks.length, currentImageIndex, handleKeyDown, overridedHandleNextImage]);
+    }, [href]);
+
+    const currentImageIndex = allImagesLinks.indexOf(href);
+    let twoTimesPrevImgUrl = null;
+    let twoTimesNextImgUrl = null;
+    let prevImageUrl = null;
+    let nextImageUrl = null;
+    if (currentImageIndex - 1 !== -1) {
+        prevImageUrl = allImagesLinks[currentImageIndex - 1];
+    }
+    if (currentImageIndex + 1 !== allImagesLinks.length) {
+        nextImageUrl = allImagesLinks[currentImageIndex + 1];
+    }
+
+    if (currentImageIndex - 2 !== -2) {
+        twoTimesPrevImgUrl = allImagesLinks[currentImageIndex - 2];
+    }
+    if (currentImageIndex + 2 !== allImagesLinks.length) {
+        twoTimesNextImgUrl = allImagesLinks[currentImageIndex + 2];
+    }    
 
     const executeTimeoutCallback = () => {
         if (lastTimeoutCallbackRef.current) {

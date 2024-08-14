@@ -183,10 +183,7 @@ const AboutUs = () => {
             handleNextImage={goToNextDesignImage}
             handlePrevImage={goToPrevDesignImage}
         />
-
-        <div onClick={() => { console.log('asdasdasdasd'); }}>
-            test
-        </div>
+        
         <article className={styles.article}>
             <div
                 className={styles.articleInfo}
@@ -196,7 +193,6 @@ const AboutUs = () => {
             </div>
 
             <div className={styles.smallImageGallery}>
-                {console.log('asd', styles)}
                 {welcomeImageLinks.map((item) => <div
                     key={item.id}
                     className={styles['image-wrapper']}
