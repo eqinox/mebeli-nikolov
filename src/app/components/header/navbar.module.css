@@ -16,6 +16,12 @@
     margin: 0 10px;
 }
 
+.logoDiv {
+    margin-right: 10%;
+    margin-left: 3%;
+    cursor: pointer
+}
+
 .navLink {
     text-decoration: none;
     /* text-underline-offset: 15px; */
@@ -64,8 +70,12 @@
     /* Hide the underline */
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
     .links {
         display: none;
+    }
+
+    .logoDiv {
+        margin: 0;
     }
 }

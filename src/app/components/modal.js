@@ -101,7 +101,6 @@ const Modal = forwardRef(({ href, resetImage, handleNextImage, handlePrevImage }
                     <FaChevronCircleLeft size={30} className={styles.arrowIcon} />
                 </div>
 
-
                 <Image
                     src={href}
                     alt='Displayed Image'
@@ -117,9 +116,6 @@ const Modal = forwardRef(({ href, resetImage, handleNextImage, handlePrevImage }
                     <FaChevronCircleRight size={30} className={styles.arrowIcon} />
                 </div>
             </div>}
-        {/* <form method="dialog"> */}
-        {/* <button onClick={() => handleClose()}>Close</button> */}
-        {/* </form> */}
     </dialog>;
 });
 

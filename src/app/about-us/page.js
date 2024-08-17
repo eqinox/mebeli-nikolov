@@ -1,6 +1,5 @@
 "use client"
-// import Image from 'next/image';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import styles from './page.module.css';
 import { BiExpandAlt } from "react-icons/bi";
 import { useRef, useState } from 'react';
@@ -183,7 +182,7 @@ const AboutUs = () => {
             handleNextImage={goToNextDesignImage}
             handlePrevImage={goToPrevDesignImage}
         />
-        
+
         <article className={styles.article}>
             <div
                 className={styles.articleInfo}
@@ -299,7 +298,7 @@ const AboutUs = () => {
 
         <article>
             <h3 style={{ textAlign: 'center', color: 'black' }}>Партньори</h3>
-            <div style={{ width: '70%', margin: 'auto' }}>
+            <div className={styles.partnersImageContainer}>
                 {partnersImageLinks.map((image) => {
                     return (<div
                         key={image.id}
@@ -309,9 +308,9 @@ const AboutUs = () => {
                         <Image
                             src={image.src}
                             alt={image.alt}
-                            width={200}
-                            height={100}
-                            priority
+                            fill
+                            style={{ objectFit: 'contain' }}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                     </div>)
                 })}

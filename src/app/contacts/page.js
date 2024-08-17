@@ -24,24 +24,22 @@ const Contacts = () => {
         { src: '/partners/wodego2.png', alt: 'wodego', id: 20 },
         { src: '/partners/Egger.png', alt: 'egger', id: 21 },
     ]
-    const style = {
-        display: 'flex',        // Enable Flexbox
-        flexDirection: 'row', // Stack children vertically
-        justifyContent: 'center', // Align content to the start
-        alignItems: 'center',    // Center horizontally
-        marginTop: '50px',       // Space from the top
-        width: '100%',          // Take full width to center content horizontally
-    };
 
-    return <div style={style}>
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginRight: '10%',
-        }}>
-            {leftSidePartners.map((image) => (
-                <PartnerImage key={image.id} image={image} />
-            ))}
+    return <div className={styles.mainParent}>
+        <div className={styles.leftSide}>
+            {leftSidePartners.map((image) => <div
+                key={image.id}
+                className={styles.partner}
+                style={{ marginBottom: '30px' }}
+            >
+                <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+            </div>)}
         </div>
 
         <div className={styles.container}>
@@ -72,37 +70,22 @@ const Contacts = () => {
 
         </div>
 
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginLeft: '10%'
-        }}>
-            {rightSidePartners.map((image) => (
-                <PartnerImage key={image.id} image={image} />
-            ))}
+        <div className={styles.rightSide}>
+            {rightSidePartners.map((image) => <div
+                key={image.id}
+                className={styles.partner}
+                style={{ marginBottom: '30px' }}
+            >
+                <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+            </div>)}
         </div>
     </div>;
-};
-
-const PartnerImage = ({ image }) => {
-    const { width, height } = useImageSize(image.src);
-    const adjustedWidth = width * 0.4;
-    const adjustedHeight = height * 0.4;
-
-    return (
-        <div
-            key={image.id}
-            className={styles.partner}
-            style={{ marginBottom: '30px' }}
-        >
-            <Image
-                src={image.src}
-                alt={image.alt}
-                width={adjustedWidth}
-                height={adjustedHeight}
-            />
-        </div>
-    );
 };
 
 

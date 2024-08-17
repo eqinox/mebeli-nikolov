@@ -37,8 +37,8 @@ const Header = () => {
                 margin: '0px'
             }}
         >
-            <div style={{ marginRight: '10%', marginLeft: '3%', cursor: 'pointer' }}
-                // style={{ cursor: 'pointer' }}
+            <div
+                className={styles.logoDiv}
                 onClick={() => { router.push('/') }}
             >
                 <Image

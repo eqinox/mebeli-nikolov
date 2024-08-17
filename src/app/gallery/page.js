@@ -1,19 +1,20 @@
 "use client"
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { IoCloseSharp } from "react-icons/io5";
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
+
 import { imageUrlBase } from "../utils/helper";
 import axiosInstance from "../utils/axios-instance";
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import styles from './page.module.css';
-import SliderMode from "./sliderMode";
 
 const Gallery = () => {
     const [images, setImages] = useState([]);
-    const [allImagesLinks, setAllImagesLinks] = useState([]);
+    const [imagesInCollection, setImagesInCollection] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [imageForOpening, setImageForOpening] = useState("");
-
-    const sliderRef = useRef(null);
+    const [viewCollection, setViewCollection] = useState(false);
 
     useEffect(() => {
         const fetchImages = async () => {
@@ -32,32 +33,27 @@ const Gallery = () => {
         fetchImages();
     }, [])
 
+    // Add event listener for 'Escape' key press
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                setViewCollection(false);
+            }
+        };
+
+        if (viewCollection) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [viewCollection]);
+
     const openGalleryInSliderMode = (item) => {
-        const imagesLinks = item.attributes.images.data.map((image) => imageUrlBase + image.attributes.url);
-        const href = imagesLinks[0];
-        if (href) {
-            sliderRef.current.showModal();
-            setImageForOpening(href);
-            setAllImagesLinks(imagesLinks);
-        }
-    }
-
-    const goToNextImage = (url) => {
-        const index = allImagesLinks.findIndex((item) => item === url);
-        if (index + 1 === allImagesLinks.length) {
-            // its the last so skip
-        } else {
-            setImageForOpening(allImagesLinks[index + 1]);
-        }
-    }
-
-    const goToPrevImage = (url) => {
-        const index = allImagesLinks.findIndex((item) => item === url);
-        if (index - 1 === -1) {
-            // its first so skip
-        } else {
-            setImageForOpening(allImagesLinks[index - 1]);
-        }
+        const images = item.attributes.images.data.map((image) => image);
+        setViewCollection(true);
+        setImagesInCollection(images);
     }
 
     if (loading) {
@@ -69,45 +65,51 @@ const Gallery = () => {
         // Render error state
         return <div>Error: {error.message}</div>;
     }
-    
-    return <div style={{width: '100%'}} >
 
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            flex: '1 0 auto',
-            position: 'relative'
-        }}>
-            <SliderMode
-                ref={sliderRef}
-                href={imageForOpening}
-                allImagesLinks={allImagesLinks}
-                resetImage={setImageForOpening}
-                handleNextImage={goToNextImage}
-                handlePrevImage={goToPrevImage}
+    const images2 = imagesInCollection.map((image) => ({
+        original: imageUrlBase + image.attributes.url,
+        thumbnail: imageUrlBase + image.attributes.formats.thumbnail.url,
+    }));
+
+    return <div style={{ width: '100%' }} >
+        {!viewCollection && <h1 style={{ textAlign: 'center' }}>Галерия</h1>}
+
+
+        {!viewCollection && images.length && images.map((collection) => <div
+            key={collection.id}
+            className={styles.gallery}
+            onClick={() => openGalleryInSliderMode(collection)}
+        >
+            <Image
+                alt={`${collection.attributes.title}`}
+                src={imageUrlBase + collection.attributes.displayImage.data.attributes.url}
+                height={240}
+                width={320}
             />
-        </div>
-
-        <h1 style={{ textAlign: 'center' }}>Галерия</h1>
-
-        {images.length > 0 && images.map((item) =>
-            <div
-                key={item.id}
-                className={styles.gallery}
-                onClick={() => openGalleryInSliderMode(item)}
-            >
-                <Image
-                    alt={`${item.attributes.title}`}
-                    src={imageUrlBase + item.attributes.displayImage.data.attributes.url}
-                    height={240}
-                    width={320}
-                />
-                <div className={styles.overlay}>
-                    {item.attributes.title}
-                </div>
+            <div className={styles.overlay}>
+                {collection.attributes.title}
             </div>
+        </div>)}
 
-        )}
+        {viewCollection && <>
+            <div style={{ position: 'relative' }}>
+                <div onClick={() => setViewCollection(false)} style={{ position: 'absolute', zIndex: '100', top: '0', right: '0' }}>
+                    <IoCloseSharp size={30} className={styles.arrowIcon} />
+                </div>
+
+                <ImageGallery
+                    items={images2}
+                    showThumbnails={true} // Hides thumbnails below the images
+                    showPlayButton={true} // Hide the play button
+                    showFullscreenButton={true} // Show the fullscreen button
+                    useBrowserFullscreen={true} // Use the browser's native fullscreen API
+                    showBullets={true} // Show bullets (pagination dots)
+                    slideDuration={600} // Duration of slide transition in milliseconds
+                    autoPlay={true} // Enable autoplay
+                    slideInterval={3000} // Interval between slides (3 seconds)
+                />
+            </div>
+        </>}
 
     </div>;
 };
