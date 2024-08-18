@@ -1,8 +1,9 @@
 "use client"
 
 import Link from "next/link";
-import styles from "./navbar.module.css";
 import { usePathname } from "next/navigation";
+
+import styles from "./navbar.module.css";
 
 const Navbar = ({ className, headingItems }) => {
     const pathname = usePathname()

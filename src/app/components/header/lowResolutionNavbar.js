@@ -1,7 +1,8 @@
 "use client"
 import { usePathname } from "next/navigation";
-import styles from "./lowResolutionNavbar.module.css";
 import Link from 'next/link'
+
+import styles from "./lowResolutionNavbar.module.css";
 
 const LowResolutionNavbar = ({ className, headingItems, showDropdown, toggleMenuDropdown }) => {
     const pathname = usePathname()

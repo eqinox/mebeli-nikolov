@@ -1,7 +1,8 @@
-import styles from './footer.module.css';
 import { IoLocationSharp } from "react-icons/io5";
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
+
+import styles from './footer.module.css';
 
 const Footer = () => {
     return (

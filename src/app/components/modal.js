@@ -1,9 +1,10 @@
 import { isEmpty } from "lodash";
 import Image from "next/legacy/image";
 import { forwardRef, useEffect, useRef, useState } from "react";
-import styles from './modal.module.css';
 import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
+
+import styles from './modal.module.css';
 
 const Modal = forwardRef(({ href, resetImage, handleNextImage, handlePrevImage }, ref) => {
     const [isZoomed, setIsZoomed] = useState(false);

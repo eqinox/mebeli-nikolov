@@ -1,12 +1,12 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import Image from 'next/image';
 
 import { imageUrlBase } from "../utils/helper";
 import axiosInstance from "../utils/axios-instance";
-import Image from 'next/image';
 import styles from './page.module.css';
 
 const Gallery = () => {
@@ -15,6 +15,7 @@ const Gallery = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [viewCollection, setViewCollection] = useState(false);
+    const galleryRef = useRef(null);
 
     useEffect(() => {
         const fetchImages = async () => {
@@ -31,6 +32,20 @@ const Gallery = () => {
             }
         }
         fetchImages();
+
+        const handleKeyDown = (event) => {
+            if (event.key === 'ArrowRight') {
+                galleryRef.current.slideToIndex(galleryRef.current.getCurrentIndex() + 1);
+            } else if (event.key === 'ArrowLeft') {
+                galleryRef.current.slideToIndex(galleryRef.current.getCurrentIndex() - 1);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, [])
 
     // Add event listener for 'Escape' key press
@@ -98,6 +113,7 @@ const Gallery = () => {
                 </div>
 
                 <ImageGallery
+                    ref={galleryRef}
                     items={images2}
                     showThumbnails={true} // Hides thumbnails below the images
                     showPlayButton={true} // Hide the play button

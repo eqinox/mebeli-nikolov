@@ -1,8 +1,9 @@
 "use client"
 import Image from 'next/image';
-import styles from './page.module.css';
 import { BiExpandAlt } from "react-icons/bi";
 import { useRef, useState } from 'react';
+
+import styles from './page.module.css';
 import Modal from '../components/modal';
 
 const AboutUs = () => {
@@ -11,25 +12,29 @@ const AboutUs = () => {
     const [productImageForOpening, setProductImageForOpening] = useState("");
     const [designImageForOpening, setDesignImageForOpening] = useState("");
 
-    const [welcomeImageLinks, setWelcomeImageLinks] = useState([
+    const welcomeImageLinks = [
         { src: '/about-us/20170423_105125.jpg', alt: 'working-team', id: 1 },
         { src: '/about-us/20170423_160800.jpg', alt: 'diploma', id: 2 }
-    ])
-    const [productionImageLinks, setProductionImageLinks] = useState([
+    ]
+
+    const productionImageLinks = [
         { src: '/about-us/20170423_104509.jpg', alt: 'work-process1', id: 3 },
         { src: '/about-us/20170423_104725.jpg', alt: 'work-process2', id: 4 },
         { src: '/about-us/20170423_104926.jpg', alt: 'work-process3', id: 5 },
-    ])
-    const [productImageLinks, setPOroductImageLinks] = useState([
+    ]
+
+    const productImageLinks = [
         { src: '/about-us/20140417_150557.jpg', alt: 'kitchen-example', id: 6 },
         { src: '/about-us/20150708_123104-e1493010335693.jpg', alt: 'work-example', id: 7 },
         { src: '/about-us/20150203_134656.jpg', alt: 'wardrobe-example', id: 8 },
-    ])
-    const [designImageLinks, setDesignImageLinks] = useState([
+    ]
+
+    const designImageLinks = [
         { src: '/about-us/20170423_114112.jpg', alt: 'kitchen-drawinmg', id: 9 },
         { src: '/about-us/20170423_114330.jpg', alt: 'kitchen-drawing2', id: 10 }
-    ])
-    const [partnersImageLinks, setPartnersImageLinks] = useState([
+    ]
+
+    const partnersImageLinks = [
         { src: '/partners/orma.png', alt: 'orma', id: 11 },
         { src: '/partners/glunz.png', alt: 'glunz', id: 12 },
         { src: '/partners/fundermax.png', alt: 'fundermax', id: 13 },
@@ -41,7 +46,8 @@ const AboutUs = () => {
         { src: '/partners/getalit.jpg', alt: 'getalit', id: 19 },
         { src: '/partners/wodego2.png', alt: 'wodego', id: 20 },
         { src: '/partners/Egger.png', alt: 'egger', id: 21 },
-    ])
+    ]
+
     const welcomeRef = useRef(null);
     const productionRef = useRef(null);
     const productRef = useRef(null);

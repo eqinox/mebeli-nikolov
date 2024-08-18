@@ -1,14 +1,15 @@
 "use client"
 import { useEffect, useState } from "react";
-import axiosInstance from "./utils/axios-instance";
-import { imageUrlBase } from "./utils/helper";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+
+import axiosInstance from "./utils/axios-instance";
+import { imageUrlBase } from "./utils/helper";
 import './swiper.css';
 
 export default function Home() {
@@ -48,12 +49,14 @@ export default function Home() {
   return <div>
     <h1 style={{ textAlign: 'center' }}>Мебели по поръчка</h1>
     <Swiper
-      modules={[
-        Navigation,
-        Scrollbar,
-        A11y]}
+      modules={[Navigation, Scrollbar, A11y, Autoplay]} // Add Autoplay module here
       spaceBetween={50}
       slidesPerView={3}
+      autoplay={{
+        delay: 3000, // Delay between slides in milliseconds (3000ms = 3s)
+        disableOnInteraction: false, // Continue autoplay even after user interaction
+        pauseOnMouseEnter: true, // Pause autoplay on hover
+      }}
       centeredSlides={true}
       navigation
       scrollbar={{ draggable: true }}

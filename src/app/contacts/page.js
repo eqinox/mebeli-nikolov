@@ -1,11 +1,11 @@
 "use client"
 import React from 'react';
-import styles from './page.module.css';
 import { IoLocationSharp } from "react-icons/io5";
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import { IoMailOutline } from "react-icons/io5";
-import useImageSize from '../hooks/useImageSize';
 import Image from 'next/image';
+
+import styles from './page.module.css';
 
 const Contacts = () => {
     const leftSidePartners = [

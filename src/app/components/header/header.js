@@ -2,12 +2,12 @@
 import { IoMdMenu } from "react-icons/io";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import styles from "./header.module.css";
 import Navbar from "./navbar";
 import LowResolutionNavbar from "./lowResolutionNavbar";
 import Button from "../UI/button";
-import { useRouter } from "next/navigation";
 
 const Header = () => {
     const router = useRouter();
