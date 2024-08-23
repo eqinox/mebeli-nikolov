@@ -1,17 +1,11 @@
 "use client"
 import Image from 'next/image';
-import { BiExpandAlt } from "react-icons/bi";
-import { useRef, useState } from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 import styles from './page.module.css';
-import Modal from '../components/modal';
 
 const AboutUs = () => {
-    const [welcomeImageForOpening, setWelcomeImageForOpening] = useState("");
-    const [productionImageForOpening, setProductionImageForOpening] = useState("");
-    const [productImageForOpening, setProductImageForOpening] = useState("");
-    const [designImageForOpening, setDesignImageForOpening] = useState("");
-
     const welcomeImageLinks = [
         { src: '/about-us/20170423_105125.jpg', alt: 'working-team', id: 1 },
         { src: '/about-us/20170423_160800.jpg', alt: 'diploma', id: 2 }
@@ -48,147 +42,10 @@ const AboutUs = () => {
         { src: '/partners/Egger.png', alt: 'egger', id: 21 },
     ]
 
-    const welcomeRef = useRef(null);
-    const productionRef = useRef(null);
-    const productRef = useRef(null);
-    const designRef = useRef(null);
-
-    const handleOpeningWelcomeModal = (href) => {
-        setWelcomeImageForOpening(href);
-        if (href) {
-            welcomeRef.current.showModal();
-        }
-    }
-
-    const handleOpeningProductionModal = (href) => {
-        setProductionImageForOpening(href);
-        if (href) {
-            productionRef.current.showModal();
-        }
-    }
-
-    const handleOpeningProductModal = (href) => {
-        setProductImageForOpening(href);
-        if (href) {
-            productRef.current.showModal();
-        }
-    }
-
-    const handleOpeningDesignModal = (href) => {
-        setDesignImageForOpening(href);
-        if (href) {
-            designRef.current.showModal();
-        }
-    }
-
-    const goToNextWelcomeImage = (url) => {
-        const index = welcomeImageLinks.findIndex((item) => item.src === url);
-        if (index + 1 === welcomeImageLinks.length) {
-            setWelcomeImageForOpening(welcomeImageLinks[0].src);
-        } else {
-            setWelcomeImageForOpening(welcomeImageLinks[index + 1].src);
-        }
-    }
-
-    const goToPrevWelcomeImage = (url) => {
-        const index = welcomeImageLinks.findIndex((item) => item.src === url);
-        if (index - 1 === -1) {
-            setWelcomeImageForOpening(welcomeImageLinks[welcomeImageLinks.length - 1].src);
-        } else {
-            setWelcomeImageForOpening(welcomeImageLinks[index - 1].src);
-        }
-    }
-
-    const goToNextProductionImage = (url) => {
-        const index = productionImageLinks.findIndex((item) => item.src === url);
-        if (index + 1 === productionImageLinks.length) {
-            setProductionImageForOpening(productionImageLinks[0].src);
-        } else {
-            setProductionImageForOpening(productionImageLinks[index + 1].src);
-        }
-    }
-
-    const goToPrevProductionImage = (url) => {
-        const index = productionImageLinks.findIndex((item) => item.src === url);
-        if (index - 1 === -1) {
-            setProductionImageForOpening(productionImageLinks[productionImageLinks.length - 1].src);
-        } else {
-            setProductionImageForOpening(productionImageLinks[index - 1].src);
-        }
-    }
-
-    const goToNextProductImage = (url) => {
-        const index = productImageLinks.findIndex((item) => item.src === url);
-        if (index + 1 === productImageLinks.length) {
-            setProductImageForOpening(productImageLinks[0].src);
-        } else {
-            setProductImageForOpening(productImageLinks[index + 1].src);
-        }
-    }
-
-    const goToPrevProductImage = (url) => {
-        const index = productImageLinks.findIndex((item) => item.src === url);
-        if (index - 1 === -1) {
-            setProductImageForOpening(productImageLinks[productImageLinks.length - 1].src);
-        } else {
-            setProductImageForOpening(productImageLinks[index - 1].src);
-        }
-    }
-
-    const goToNextDesignImage = (url) => {
-        const index = designImageLinks.findIndex((item) => item.src === url);
-        if (index + 1 === designImageLinks.length) {
-            setDesignImageForOpening(designImageLinks[0].src);
-        } else {
-            setDesignImageForOpening(designImageLinks[index + 1].src);
-        }
-    }
-
-    const goToPrevDesignImage = (url) => {
-        const index = designImageLinks.findIndex((item) => item.src === url);
-        if (index - 1 === -1) {
-            setDesignImageForOpening(designImageLinks[designImageLinks.length - 1].src);
-        } else {
-            setDesignImageForOpening(designImageLinks[index - 1].src);
-        }
-    }
-
     return <section style={{
         marginBottom: '70px'
     }}
     >
-        <Modal
-            ref={welcomeRef}
-            href={welcomeImageForOpening}
-            resetImage={setWelcomeImageForOpening}
-            handleNextImage={goToNextWelcomeImage}
-            handlePrevImage={goToPrevWelcomeImage}
-        />
-
-        <Modal
-            ref={productionRef}
-            href={productionImageForOpening}
-            resetImage={setProductionImageForOpening}
-            handleNextImage={goToNextProductionImage}
-            handlePrevImage={goToPrevProductionImage}
-        />
-
-        <Modal
-            ref={productRef}
-            href={productImageForOpening}
-            resetImage={setProductImageForOpening}
-            handleNextImage={goToNextProductImage}
-            handlePrevImage={goToPrevProductImage}
-        />
-
-        <Modal
-            ref={designRef}
-            href={designImageForOpening}
-            resetImage={setDesignImageForOpening}
-            handleNextImage={goToNextDesignImage}
-            handlePrevImage={goToPrevDesignImage}
-        />
-
         <article className={styles.article}>
             <div
                 className={styles.articleInfo}
@@ -198,22 +55,19 @@ const AboutUs = () => {
             </div>
 
             <div className={styles.smallImageGallery}>
-                {welcomeImageLinks.map((item) => <div
-                    key={item.id}
-                    className={styles['image-wrapper']}
-                    onClick={() => handleOpeningWelcomeModal(item.src)}
-                >
-                    <Image
-                        src={item.src}
-                        alt={item.alt}
-                        width={200}
-                        height={150}
-                    />
-                    <div className={styles.overlay}></div>
-                    <div className={styles['expand-icon']}>
-                        < BiExpandAlt />
+                <PhotoProvider>
+                    <div >
+                        {welcomeImageLinks.map((image) => <PhotoView key={image.id} src={image.src}>
+                            <Image
+                                src={image.src}
+                                alt="test"
+                                width={250}
+                                height={200}
+                                className={styles.imageWithMargin}
+                            />
+                        </PhotoView>)}
                     </div>
-                </div>)}
+                </PhotoProvider>
             </div>
         </article>
 
@@ -223,28 +77,20 @@ const AboutUs = () => {
                 <p>Високотехнологичните машини са гаранция за качеството на крайният продукт. Производствената база е оборудвана със съвременни машини. Форматно – разкрояващ циркуляр на фирмата LAZZARI и кантираща машина NIKMANN.</p>
             </div>
             <div className={styles.smallImageGallery}>
-                {productionImageLinks.map((item) =>
-
-                    <div
-                        key={item.id}
-                        className={styles['image-wrapper']}
-                        onClick={() => handleOpeningProductionModal(item.src)}
-                    >
-                        <Image
-                            src={item.src}
-                            alt={item.alt}
-                            width={200}
-                            height={150}
-                        />
-                        <div className={styles.overlay}></div>
-                        <div className={styles['expand-icon']}>
-                            < BiExpandAlt />
-                        </div>
-                    </div>)}
+                <PhotoProvider>
+                    <div >
+                        {productionImageLinks.map((image) => <PhotoView key={image.id} src={image.src}>
+                            <Image
+                                src={image.src}
+                                alt="test"
+                                width={250}
+                                height={200}
+                                className={styles.imageWithMargin}
+                            />
+                        </PhotoView>)}
+                    </div>
+                </PhotoProvider>
             </div>
-
-
-
         </article>
 
         <article className={styles.article}>
@@ -254,23 +100,19 @@ const AboutUs = () => {
             </div>
 
             <div className={styles.smallImageGallery}>
-                {productImageLinks.map((item) =>
-                    <div
-                        key={item.id}
-                        className={styles['image-wrapper']}
-                        onClick={() => handleOpeningProductModal(item.src)}
-                    >
-                        <Image
-                            src={item.src}
-                            alt={item.alt}
-                            width={200}
-                            height={150}
-                        />
-                        <div className={styles.overlay}></div>
-                        <div className={styles['expand-icon']}>
-                            < BiExpandAlt />
-                        </div>
-                    </div>)}
+                <PhotoProvider>
+                    <div >
+                        {productImageLinks.map((image) => <PhotoView key={image.id} src={image.src}>
+                            <Image
+                                src={image.src}
+                                alt="test"
+                                width={250}
+                                height={200}
+                                className={styles.imageWithMargin}
+                            />
+                        </PhotoView>)}
+                    </div>
+                </PhotoProvider>
             </div>
 
         </article>
@@ -282,23 +124,19 @@ const AboutUs = () => {
             </div>
 
             <div className={styles.smallImageGallery}>
-                {designImageLinks.map((item) =>
-                    <div
-                        key={item.id}
-                        className={styles['image-wrapper']}
-                        onClick={() => handleOpeningDesignModal(item.src)}
-                    >
-                        <Image
-                            src={item.src}
-                            alt={item.alt}
-                            width={200}
-                            height={150}
-                        />
-                        <div className={styles.overlay}></div>
-                        <div className={styles['expand-icon']}>
-                            < BiExpandAlt />
-                        </div>
-                    </div>)}
+                <PhotoProvider>
+                    <div >
+                        {designImageLinks.map((image) => <PhotoView key={image.id} src={image.src}>
+                            <Image
+                                src={image.src}
+                                alt="test"
+                                width={250}
+                                height={200}
+                                className={styles.imageWithMargin}
+                            />
+                        </PhotoView>)}
+                    </div>
+                </PhotoProvider>
             </div>
         </article>
 

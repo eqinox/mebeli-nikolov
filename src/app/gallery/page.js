@@ -25,7 +25,7 @@ const Gallery = () => {
 
             } catch (err) {
                 // Handle any errors that occur during the fetch
-                setError(error);
+                setError(() => err);
             } finally {
                 // Set loading to false once the fetch is complete
                 setLoading(false);
