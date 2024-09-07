@@ -5,23 +5,15 @@ const nextConfig = {
             {
                 protocol: 'http',
                 hostname: '127.0.0.1',
-                port: '1337',
-                // pathname can be used to specify a path pattern, if needed
+                port: '1337', // For development purposes
+                // You can specify pathname if you want to limit it to specific paths
             },
             {
                 protocol: 'https',
-                hostname: 'sweetsurprises-f3cd9971ba40.herokuapp.com',
-                // No need to specify port for standard https (443) requests
-                // pathname can be used here as well, if needed
-            },
-            // Add your S3 bucket here
-            {
-                protocol: 'https',
-                hostname: 'sweetsurprises-bucket.s3.eu-north-1.amazonaws.com',
+                hostname: 'mebeli-nikolov.s3.eu-north-1.amazonaws.com',
                 // No port needed for standard https requests
-                // You can add pathname if you want to limit to specific paths
-            },
-            // ... other patterns
+                // Optionally, you can specify pathname to limit to specific image paths
+            }
         ],
     }
 };
