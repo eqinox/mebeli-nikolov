@@ -1,3 +1,5 @@
+"use client";
+
 import { Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -16,10 +18,11 @@ const Contacts = () => {
 
     return () => clearInterval(interval);
   }, []);
-  console.log("is ringing", isRinging);
+
   return (
-    <section className="text-3xl mt-6 flex justify-center text-center flex-col items-center">
+    <section className="text-3xl md:mt-6 mt-2 flex justify-center text-center flex-col items-center">
       <span className="mb-2 font-bold">Телефон за контакт</span>
+
       <span className="flex items-baseline">
         <a href="tel:0876434464" className="cursor-text">
           0876 43 44 64

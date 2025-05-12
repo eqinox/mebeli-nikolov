@@ -1,3 +1,4 @@
+"use client";
 import styles from "./gallery-button.module.css";
 
 const GalleryButton = () => {
