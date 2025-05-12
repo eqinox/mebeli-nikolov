@@ -8,10 +8,12 @@ export default function Home() {
     <div>
       <div className="flex flex-col items-center">
         <Navbar />
-        <h1 className="md:text-4xl text-3xl md:my-6 my-2">Мебели по поръчка</h1>
+        <h1 className="md:text-4xl text-3xl md:my-6 mt-2 mb-0">
+          Мебели по поръчка
+        </h1>
         <SwiperSlider />
         <Contacts />
-        <div className="md:text-3xl text-2xl md:bottom-10 bottom-5 absolute">
+        <div className="md:text-3xl text-2xl md:bottom-10 bottom-0 absolute">
           <GalleryButton />
         </div>
       </div>
