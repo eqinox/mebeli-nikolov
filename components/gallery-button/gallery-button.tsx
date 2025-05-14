@@ -6,13 +6,27 @@ const GalleryButton = () => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-      // Try to open in Instagram app
+      let didHide = false;
+
+      const onVisibilityChange = () => {
+        if (document.hidden) {
+          didHide = true;
+        }
+      };
+
+      document.addEventListener("visibilitychange", onVisibilityChange);
+
+      // Try to open the Instagram app
       window.location.href = "instagram://user?username=grigor8080";
 
-      // Fallback after 1 second if app isn't installed
+      // Wait 1 second to check if the app opened
       setTimeout(() => {
-        window.location.href = "https://www.instagram.com/grigor8080/";
-      }, 1000);
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+        if (!didHide) {
+          // App didn't open — fallback to browser
+          window.location.href = "https://www.instagram.com/grigor8080/";
+        }
+      }, 6000);
     } else {
       // Desktop: open in new tab
       window.open("https://www.instagram.com/grigor8080/", "_blank");
