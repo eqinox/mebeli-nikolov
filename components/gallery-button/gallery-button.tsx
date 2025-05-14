@@ -26,7 +26,7 @@ const GalleryButton = () => {
           // App didn't open — fallback to browser
           window.location.href = "https://www.instagram.com/grigor8080/";
         }
-      }, 6000);
+      }, 1000);
     } else {
       // Desktop: open in new tab
       window.open("https://www.instagram.com/grigor8080/", "_blank");
