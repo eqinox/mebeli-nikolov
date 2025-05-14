@@ -19,7 +19,7 @@ const SwiperSlider = () => {
   ];
 
   return (
-    <div className="relative w-full flex h-[50vh]">
+    <div className="relative w-full flex h-[50vh] md:mt-0 -mt-2">
       <Swiper
         modules={[Navigation, Scrollbar, A11y, Autoplay]} // Add Autoplay module here
         spaceBetween={50}

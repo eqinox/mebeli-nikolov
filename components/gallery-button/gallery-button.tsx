@@ -2,13 +2,25 @@
 import styles from "./gallery-button.module.css";
 
 const GalleryButton = () => {
+  const handleClick = () => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // Try to open in Instagram app
+      window.location.href = "instagram://user?username=grigor8080";
+
+      // Fallback after 1 second if app isn't installed
+      setTimeout(() => {
+        window.location.href = "https://www.instagram.com/grigor8080/";
+      }, 1000);
+    } else {
+      // Desktop: open in new tab
+      window.open("https://www.instagram.com/grigor8080/", "_blank");
+    }
+  };
+
   return (
-    <div
-      className={styles["wrapper"]}
-      onClick={() => {
-        window.open("https://www.instagram.com/grigor8080/");
-      }}
-    >
+    <div className={styles["wrapper"]} onClick={handleClick}>
       <a className={styles["cta"]} href="#">
         <span className={styles.span}>Галерия</span>
         <span className={styles.span}>
