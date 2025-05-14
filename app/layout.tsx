@@ -21,8 +21,8 @@ export default function RootLayout({
           backgroundImage: "url('/wood-2.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          minHeight: "100vh",
         }}
+        className="h-dvh"
       >
         {children}
       </body>

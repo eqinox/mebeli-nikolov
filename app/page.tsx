@@ -5,8 +5,8 @@ import SwiperSlider from "@/components/slider";
 
 export default function Home() {
   return (
-    <div>
-      <div className="flex flex-col items-center">
+    <div className="h-dvh">
+      <div className="flex flex-col items-center h-dvh">
         <Navbar />
         <h1 className="md:text-4xl text-3xl md:my-6 mt-2 mb-0">
           Мебели по поръчка
